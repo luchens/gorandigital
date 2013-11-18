@@ -103,7 +103,11 @@ $(document).ready(function() {
 	});*/
 
 
+	/*
 	$('#modal-btn').click(function (e) {
+		console.log(e);
+		*/
+		/*
 		e.preventDefault();
 	
 		var src = 'http://www.youtube.com/v/'+e+'&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;autoplay=1';
@@ -113,7 +117,8 @@ $(document).ready(function() {
 		console.log(e);
 
 		$('#myModal iframe').removeAttr('src');
-	});
+		*/
+	/*});*/
 	
 
 	/*
@@ -163,5 +168,85 @@ $(document).ready(function() {
 	//$(".thumbnails .thumbnail").height(h);
 
 	//console.log(arrayH);
+
+	$('.play-gallery-cta').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$('#modal-homepage-gallery').modal('show');
+	});
+
+	$('.play-video-cta').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$('#modal-homepage-video').modal('show');
+	});
+
+	flowplayer.conf = {
+		native_fullscreen : true,
+		tooltip : false,
+		autoBuffering : true
+	};
+
+	var videoStarted = false;
+	var millisecondsElapsed = 0;
+
+	if(window.mixpanel) {
+	flowplayer().bind('progress', function(e, api) {
+	if(!videoStarted) {
+	videoStarted = true;
+	mixpanel.track('Homepage video started');					
+	}
+
+	millisecondsElapsed += 250;
+	var secondsElapsed = millisecondsElapsed / 1000;
+
+	if(secondsElapsed % 15 == 0) {
+	mixpanel.track('Homepage video watched', { secondsElapsed : secondsElapsed });
+	}
+	});
+
+	flowplayer().bind('finish', function(e, api) {
+	mixpanel.track('Homepage video finished');
+	});
+
+	flowplayer().bind('fullscreen', function(e, api) {
+		mixpanel.track('Homepage video fullscreen');
+	});
+	}
+
+	$('#modal-homepage-video').on('shown', function(e) {
+		flowplayer().resume();		
+	}).on('hide', function(e) {
+		flowplayer().pause();
+	});
+
+
+	$('#slides-thumbs').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        asNavFor: '#slider',
+        touch: true
+      });
+
+      $('#slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#slides-thumbs",
+        start: function(slider){
+          $('body').removeClass('loading');
+        },
+        touch: true
+      });
+
+
+
 
 });
