@@ -71,6 +71,19 @@
 	<link href="css/flexslider.css" rel="stylesheet">
 	<link href="css/fonts.css" rel="stylesheet">	
 	<link href="css/style.css" rel="stylesheet">
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$.getJSON("json/ubicaciones_fotos.json", function(data){
+			console.log(data);
+			/*
+			for(usuario in data.users){ 
+				$("#usuarios".append("<option>"+data.users[usuario].nombre+"</option>"; 
+			}
+			*/
+		});
+	});
+	</script>
 </head>
 
 <body>
@@ -94,8 +107,8 @@
 			
 		</div>
 
-		<div class="modal-footer">
-		</div>
+		<!--<div class="modal-footer">
+		</div>-->
 
 	</div>
 </div>
@@ -104,7 +117,7 @@
 	<div class="modal-inner">
 		<div class="modal-header">
 			<button class="close" data-toggle="modal" data-dismiss="modal">&times;</button>
-			<h3>&nbsp;</h3>
+			<h3>Pellegrini e Italia</h3>
 		</div>
 		
 		<div class="modal-section">
@@ -115,26 +128,10 @@
 				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
 				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
 				<li><img src="img/kitchen_adventurer_caramel.jpg" /></li>
-	            <li><img src="img/kitchen_adventurer_cheesecake_brownie.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_caramel.jpg" /></li>
-	            <li><img src="img/kitchen_adventurer_cheesecake_brownie.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_caramel.jpg" /></li>
 	          </ul>
 	        </div>
 	        <div id="slides-thumbs" class="flexslider">
 	          <ul class="slides">
-	            <li><img src="img/kitchen_adventurer_cheesecake_brownie.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_caramel.jpg" /></li>
-	            <li><img src="img/kitchen_adventurer_cheesecake_brownie.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
-				<li><img src="img/kitchen_adventurer_caramel.jpg" /></li>
 	            <li><img src="img/kitchen_adventurer_cheesecake_brownie.jpg" /></li>
 				<li><img src="img/kitchen_adventurer_lemon.jpg" /></li>
 				<li><img src="img/kitchen_adventurer_donut.jpg" /></li>
@@ -245,25 +242,25 @@
 					</div>
 					<div class="item">
 						<img alt="" src="img/slide-home-2.jpg">
-						<!--<div class="carousel-caption">
+						<div class="carousel-caption visible-desktop">
 							<h4>
-								Second Thumbnail label
+								Titulo imagen 2
 							</h4>
 							<p>
 								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
 							</p>
-						</div>-->
+						</div>
 					</div>
 					<div class="item">
 						<img alt="" src="img/slide-home-3.jpg">
-						<!--<div class="carousel-caption">
+						<div class="carousel-caption visible-desktop">
 							<h4>
-								Third Thumbnail label
+								Titulo imagen 3
 							</h4>
 							<p>
 								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
 							</p>
-						</div>-->
+						</div>
 					</div>
 				</div>
 				<!--
@@ -417,16 +414,15 @@
 			</div>
 
 			<footer class="container-box">
-				<div class="row-fluid">
+				<div class="container-fluid">
 					<div class="span1"><img src="img/logo-iso.png" /></div>
 					<div class="span5">
 						<address>
 						 	<strong>Goran Digital Advertising SRL</strong>
 						 	<br>
 						 	<span class="copy">Todos los derechos reservados 2013</span>
-						 	<br>
-						 	<i class="fa fa-envelope-o"></i> <a href="mailto:info@gorandigital.com.ar">info@gorandigital.com.ar</a><br>
-						 	<i class="fa fa-envelope-o"></i> <a href="comercial@gorandigital.com">comercial@gorandigital.com</a>
+						 	<i class="awe-envelope-alt"></i> <a href="mailto:info@gorandigital.com.ar">info@gorandigital.com.ar</a><br>
+						 	<i class="awe-envelope-alt"></i> <a href="comercial@gorandigital.com">comercial@gorandigital.com</a>
 						 	<br>
 						 	<abbr title="Teléfono"> </abbr> <span class="tel"><i class="fa fa-phone"></i> 0341 440 1911</span>
 						 </address>
@@ -449,9 +445,17 @@
 
 
 						<div class="box">
+							<!--
 							<a href="#" class="social f">f</a>
 							<a href="#" class="social t">t</a>
 							<a href="#" class="social y">x</a>
+							-->
+							<ul class="social-media">
+								<li><a href="#"><span class="awe-facebook"></span></a></li>
+								<li><a href="#"><span class="awe-twitter"></span></a></li>
+								<li><a href="#"><span class="awe-linkedin"></span></a></li>
+								<li><a href="#"><span class="awe-youtube"></span></a></li>
+							</ul>
 
 							<!--
 							<div class="btn-group">

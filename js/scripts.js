@@ -169,11 +169,49 @@ $(document).ready(function() {
 
 	//console.log(arrayH);
 
+
+
 	$('.play-gallery-cta').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		
-		$('#modal-homepage-gallery').modal('show');
+		$('#modal-homepage-gallery').modal().on('show', function() {
+            //console.log('Modal will be shown');
+        }).on('shown', function() {
+            //console.log('Modal was shown');
+			
+			$('#slides-thumbs').flexslider({
+				animation: "slide",
+				controlNav: false,
+				animationLoop: false,
+				slideshow: false,
+				itemWidth: 210,
+				itemMargin: 5,
+				asNavFor: '#slider',
+				touch: true
+			});
+
+			$('#slider').flexslider({
+				animation: "slide",
+				controlNav: false,
+				animationLoop: false,
+				slideshow: false,
+				sync: "#slides-thumbs",
+				touch: true,
+				start: function(slider){
+					$('body').removeClass('loading');
+				}
+			});
+			
+        }).on('hide', function() {
+            //console.log('Modal will be hidden');
+        }).on('hidden', function() {
+            //console.log('Modal is hidden');
+        }).show({
+            backdrop: true,
+            keyboard:true
+        });
+
 	});
 
 	$('.play-video-cta').click(function(e) {
@@ -193,27 +231,27 @@ $(document).ready(function() {
 	var millisecondsElapsed = 0;
 
 	if(window.mixpanel) {
-	flowplayer().bind('progress', function(e, api) {
-	if(!videoStarted) {
-	videoStarted = true;
-	mixpanel.track('Homepage video started');					
-	}
+		flowplayer().bind('progress', function(e, api) {
+			if(!videoStarted) {
+				videoStarted = true;
+				mixpanel.track('Homepage video started');					
+			}
 
-	millisecondsElapsed += 250;
-	var secondsElapsed = millisecondsElapsed / 1000;
+			millisecondsElapsed += 250;
+			var secondsElapsed = millisecondsElapsed / 1000;
 
-	if(secondsElapsed % 15 == 0) {
-	mixpanel.track('Homepage video watched', { secondsElapsed : secondsElapsed });
-	}
-	});
+			if(secondsElapsed % 15 == 0) {
+				mixpanel.track('Homepage video watched', { secondsElapsed : secondsElapsed });
+			}
+		});
 
-	flowplayer().bind('finish', function(e, api) {
-	mixpanel.track('Homepage video finished');
-	});
+		flowplayer().bind('finish', function(e, api) {
+			mixpanel.track('Homepage video finished');
+		});
 
-	flowplayer().bind('fullscreen', function(e, api) {
-		mixpanel.track('Homepage video fullscreen');
-	});
+		flowplayer().bind('fullscreen', function(e, api) {
+			mixpanel.track('Homepage video fullscreen');
+		});
 	}
 
 	$('#modal-homepage-video').on('shown', function(e) {
@@ -221,32 +259,5 @@ $(document).ready(function() {
 	}).on('hide', function(e) {
 		flowplayer().pause();
 	});
-
-
-	$('#slides-thumbs').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 210,
-        itemMargin: 5,
-        asNavFor: '#slider',
-        touch: true
-      });
-
-      $('#slider').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        sync: "#slides-thumbs",
-        start: function(slider){
-          $('body').removeClass('loading');
-        },
-        touch: true
-      });
-
-
-
 
 });
